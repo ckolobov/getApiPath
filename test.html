@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="getApiPath.js"></script>
+<script>
+    const firstUser = {
+        id: 20,
+        type_id: 'test'
+    };
+
+    const firstTemplate = "/api/items/%id%/%type_id%";
+
+    console.log(getApiPath(firstUser,firstTemplate));
+    console.log('Expected result: /api/items/20/test');
+
+
+    const user = {
+        id: 20,
+        name: "John Dow",
+        role: "QA",
+        salary: 100
+    };
+    const apiTemplatesSet1 = [
+        "/api/items/%id%/%name%",
+        "/api/items/%id%/%role%",
+        "/api/items/%id%/%salary%"
+    ];
+    const apiPathes = apiTemplatesSet1.map(apiPathTemplate => {
+        return getApiPath(user, apiPathTemplate);
+    });
+
+    console.log(JSON.stringify(apiPathes));
+    console.log('Expected result: ["/api/items/20/John%20Dow","/api/items/20/QA","/api/items/20/100"]');
+</script>
+</body>
+</html>
